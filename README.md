@@ -28,7 +28,7 @@ Este repositorio contiene dos microservicios desarrollados con NestJS y PostgreS
 
 ### Estructura
 
-.
+```
 ├── productos-ms
 │   ├── src/
 │   ├── test/
@@ -41,6 +41,7 @@ Este repositorio contiene dos microservicios desarrollados con NestJS y PostgreS
 │   └── Dockerfile
 ├── docker-compose.yml
 └── README.md
+```
 
 ### Variables de entorno
 
@@ -90,7 +91,7 @@ npm run test:e2e
 
 ## Arquitectura (mermaid)
 
-```mermaid
+```
 graph TD
   subgraph Cliente
     C[Cliente]
@@ -135,16 +136,17 @@ graph TD
   ```
 
 ## Contribución y despliegue
-	1.	Clonar el repositorio:
+
+1.	Clonar el repositorio:
         
-        git clone https://github.com/pedrocobe05/json_api_ms.git
+-git clone https://github.com/pedrocobe05/json_api_ms.git
 	
-    2.	Iniciar los contenedores:
+2.	Iniciar los contenedores:
         
-        docker-compose up –build
+-docker-compose up –build
 	
-    3.	Acceder a la documentación Swagger o probar desde Postman
+3.	Acceder a la documentación Swagger o probar desde Postman
 
 ## Autor
 
-    Andrés Cobeña - https://github.com/pedrocobe05
+-Andrés Cobeña - https://github.com/pedrocobe05

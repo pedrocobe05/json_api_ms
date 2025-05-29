@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+.env
+*.log
+
+# Docker
+ci/*.env
+**/Dockerfile
+**/.dockerignore
+
+# VSCode
+.vscode/
+
+# Testing
+coverage/
