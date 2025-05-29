@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  productos-db:
+    image: postgres:15
+    container_name: productos-db
+    environment:
+      POSTGRES_DB: productos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - productos-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  productos-api:
+    build:
+      context: .
+      dockerfile: ./ci/Dockerfile
+    container_name: productos-api
+    depends_on:
+      - productos-db
+    environment:
+      DB_HOST: productos-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: productos
+      PORT: 3000
+      API_KEY: supersecreta123
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  productos-data:
