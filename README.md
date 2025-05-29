@@ -139,14 +139,23 @@ graph TD
 
 1.	Clonar el repositorio:
         
--git clone https://github.com/pedrocobe05/json_api_ms.git
+git clone https://github.com/pedrocobe05/json_api_ms.git
 	
 2.	Iniciar los contenedores:
         
--docker-compose up –build
+docker-compose up –build
 	
 3.	Acceder a la documentación Swagger o probar desde Postman
 
+Productos-ms:
+
+http://localhost:3000/v1/api
+
+Inventario-ms:
+
+http://localhost:3001/v1/api
+
+
 ## Autor
 
--Andrés Cobeña - https://github.com/pedrocobe05
+Andrés Cobeña - https://github.com/pedrocobe05

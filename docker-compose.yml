@@ -1,0 +1,84 @@
+version: '3.9'
+
+services:
+
+  # Base de datos para productos
+  productos-db:
+    image: postgres:15
+    container_name: productos-db
+    environment:
+      POSTGRES_DB: productos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - productos_db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - ms-network
+
+  # Microservicio de productos
+  productos-api:
+    build:
+      context: ./productos-ms
+      dockerfile: ci/Dockerfile
+    container_name: productos-api
+    environment:
+      PORT: 3000
+      DB_HOST: productos-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: productos
+      API_KEY: supersecreta123
+    depends_on:
+      - productos-db
+    ports:
+      - "3000:3000"
+    networks:
+      - ms-network
+
+  # Base de datos para inventario
+  inventario-db:
+    image: postgres:15
+    container_name: inventario-db
+    environment:
+      POSTGRES_DB: inventario
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - inventario_db_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    networks:
+      - ms-network
+
+  # Microservicio de inventario
+  inventario-api:
+    build:
+      context: ./inventario-ms
+      dockerfile: ci/Dockerfile
+    container_name: inventario-api
+    environment:
+      PORT: 3001
+      DB_HOST: inventario-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: inventario
+      API_KEY: supersecreta123
+      PRODUCTOS_MS_URL: http://productos-api:3000
+    depends_on:
+      - inventario-db
+      - productos-api
+    ports:
+      - "3001:3001"
+    networks:
+      - ms-network
+
+volumes:
+  productos_db_data:
+  inventario_db_data:
+
+networks:
+  ms-network:
